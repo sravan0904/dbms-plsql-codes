@@ -1,0 +1,40 @@
+DECLARE
+  i NUMBER := 1;
+  ex_custom EXCEPTION;
+BEGIN
+  -- WHILE loop
+  WHILE i <= 3 LOOP
+    DBMS_OUTPUT.PUT_LINE('WHILE loop i = ' || i);
+    i := i + 1;
+  END LOOP;
+
+  -- FOR loop
+  FOR j IN 1..3 LOOP
+    DBMS_OUTPUT.PUT_LINE('FOR loop j = ' || j);
+  END LOOP;
+
+  -- Nested loop
+  FOR x IN 1..2 LOOP
+    FOR y IN 1..2 LOOP
+      DBMS_OUTPUT.PUT_LINE('Nested loop: x=' || x || ', y=' || y);
+    END LOOP;
+  END LOOP;
+
+  -- Raise built-in exception
+  DECLARE
+    num NUMBER := 10/0;
+  BEGIN
+    NULL;
+  EXCEPTION
+    WHEN ZERO_DIVIDE THEN
+      DBMS_OUTPUT.PUT_LINE('Cannot divide by zero');
+  END;
+
+  -- Raise user-defined exception
+  RAISE ex_custom;
+
+EXCEPTION
+  WHEN ex_custom THEN
+    DBMS_OUTPUT.PUT_LINE('User-defined exception raised');
+    RAISE_APPLICATION_ERROR(-20001, 'Custom error occurred!');
+END;
