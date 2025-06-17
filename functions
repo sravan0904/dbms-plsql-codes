@@ -1,0 +1,15 @@
+CREATE OR REPLACE FUNCTION calculate_bonus(p_salary NUMBER)
+RETURN NUMBER
+IS
+  v_bonus NUMBER := 0;
+BEGIN
+  IF p_salary < 20000 THEN
+    v_bonus := p_salary * 0.10;
+  ELSIF p_salary < 40000 THEN
+    v_bonus := p_salary * 0.15;
+  ELSE
+    v_bonus := p_salary * 0.20;
+  END IF;
+
+  RETURN v_bonus;
+END;
