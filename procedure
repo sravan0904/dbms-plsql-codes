@@ -1,0 +1,15 @@
+---Procedure---
+CREATE OR REPLACE PROCEDURE update_marks(
+  p_roll_no IN NUMBER,
+  p_marks IN OUT NUMBER
+)
+IS
+BEGIN
+  UPDATE students
+  SET marks = p_marks
+  WHERE roll_no = p_roll_no;
+  
+  SELECT marks INTO p_marks
+  FROM students
+  WHERE roll_no = p_roll_no;
+END;
