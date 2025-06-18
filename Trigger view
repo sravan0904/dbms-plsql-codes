@@ -1,0 +1,7 @@
+CREATE VIEW student_view AS SELECT id, name FROM student;
+
+CREATE OR REPLACE TRIGGER trg_instead
+INSTEAD OF INSERT ON student_view
+BEGIN
+  INSERT INTO student(id, name, marks, dept_id) VALUES (:NEW.id, :NEW.name, 0, NULL);
+END;
